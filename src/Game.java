@@ -6,10 +6,12 @@ import java.awt.event.ActionListener;
 public class Game {
     JFrame window;
     Container con;
-    JPanel GameTitlePanel , startButtonPanel, mainTextPanel,choiceButtonPanel;
-    JLabel Gametitle;
+    JPanel GameTitlePanel , startButtonPanel, mainTextPanel,choiceButtonPanel,playerPanel;
+    JLabel Gametitle,hpLabel, hpLabelNumber,weaponLabel,weaponLabelName;
     JButton startButton,choice1,choice2,choice3,choice4;
     JTextArea mainTextArea;
+    int playerHp;
+    String weapon;
     Font titleFont = new Font("Times New Roman", Font.PLAIN,90);
     Font normalFont = new Font("Times New Roman",Font.PLAIN,30);
     TitleScreenHandler tsHandler = new TitleScreenHandler();
@@ -44,6 +46,7 @@ public class Game {
      startButton.setForeground(Color.WHITE);
      startButton.setFont(normalFont);
      startButton.addActionListener(tsHandler);
+     startButton.setFocusPainted(false);
 
      GameTitlePanel.add(Gametitle);
      startButtonPanel.add(startButton);
@@ -57,10 +60,10 @@ public class Game {
         GameTitlePanel.setVisible(false);
        mainTextPanel = new JPanel();
        mainTextPanel.setBounds(100,100,600,250);
-       mainTextPanel.setBackground(Color.BLUE);
+       mainTextPanel.setBackground(Color.BLACK);
        con.add(mainTextPanel);
 
-       mainTextArea = new JTextArea("This is main text area and The game is going to be great!");
+       mainTextArea = new JTextArea();
        mainTextArea.setBounds(100,100,600,250);
        mainTextArea.setBackground(Color.BLACK);
        mainTextArea.setForeground(Color.WHITE);
@@ -74,29 +77,73 @@ public class Game {
         choiceButtonPanel.setLayout(new GridLayout(4,1));
         con.add(choiceButtonPanel);
 
+
         choice1 = new JButton("Choice 1");
         choice1.setBackground(Color.BLACK);
         choice1.setForeground(Color.white);
         choice1.setFont(normalFont);
         choiceButtonPanel.add(choice1);
+        choice1.setFocusPainted(false);
 
         choice2 = new JButton("Choice 2");
         choice2.setBackground(Color.BLACK);
         choice2.setForeground(Color.white);
         choice2.setFont(normalFont);
         choiceButtonPanel.add(choice2);
+        choice2.setFocusPainted(false);
 
-        choice2 = new JButton("Choice 3");
-        choice2.setBackground(Color.BLACK);
-        choice2.setForeground(Color.white);
-        choice2.setFont(normalFont);
-        choiceButtonPanel.add(choice2);
+        choice3 = new JButton("Choice 3");
+        choice3.setBackground(Color.BLACK);
+        choice3.setForeground(Color.white);
+        choice3.setFont(normalFont);
+        choiceButtonPanel.add(choice3);
+        choice3.setFocusPainted(false);
 
-        choice2 = new JButton("Choice 4");
-        choice2.setBackground(Color.BLACK);
-        choice2.setForeground(Color.white);
-        choice2.setFont(normalFont);
-        choiceButtonPanel.add(choice2);
+        choice4 = new JButton("Choice 4");
+        choice4.setBackground(Color.BLACK);
+        choice4.setForeground(Color.white);
+        choice4.setFont(normalFont);
+        choiceButtonPanel.add(choice4);
+        choice4.setFocusPainted(false);
+
+        playerPanel = new JPanel();
+        playerPanel.setBounds(100,15,600,50);
+        playerPanel.setBackground(Color.BLACK);
+        playerPanel.setLayout(new GridLayout(1,4));
+        con.add(playerPanel);
+        hpLabel = new JLabel("HP:");
+        hpLabel.setFont(normalFont);
+        hpLabel.setForeground(Color.WHITE);
+        playerPanel.add(hpLabel);
+        hpLabelNumber = new JLabel();
+        hpLabelNumber.setFont(normalFont);
+        hpLabelNumber.setForeground(Color.WHITE);
+        playerPanel.add(hpLabelNumber);
+        weaponLabel = new JLabel("Weapon:");
+        weaponLabel.setFont(normalFont);
+        weaponLabel.setForeground(Color.WHITE);
+        playerPanel.add(weaponLabel);
+        weaponLabelName = new JLabel();
+        weaponLabelName.setFont(normalFont);
+        weaponLabelName.setForeground(Color.WHITE);
+        playerPanel.add(weaponLabelName);
+        playerSetup();
+
+
+    }
+
+    public void playerSetup()
+    {
+        playerHp =15;
+        weapon="Knife";
+        weaponLabelName.setText(weapon);
+        hpLabelNumber.setText(""+playerHp);
+        townGate();
+    }
+
+    public void townGate()
+    {
+        mainTextArea.setText("You are at the Gate of the TOWN. A guard is standing at front of you. What do you do?");
     }
 
     public class TitleScreenHandler implements ActionListener
