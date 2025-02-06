@@ -4,9 +4,11 @@ import java.awt.*;
 public class Game {
     JFrame window;
     Container con;
-    JPanel GameTitlePanel;
+    JPanel GameTitlePanel , startButtonPanel;
     JLabel Gametitle;
+    JButton startButton;
     Font titleFont = new Font("Times New Roman", Font.PLAIN,90);
+    Font normalFont = new Font("Times New Roman",Font.PLAIN,30);
     public static void main(String[] args) {
         new Game();
     }
@@ -23,13 +25,24 @@ public class Game {
       GameTitlePanel = new JPanel();
       Gametitle = new JLabel("ADVENTURE");
       GameTitlePanel.setBounds(100,100,600,150); //creating a container for Title on Jpanel
-      GameTitlePanel.setBackground(Color.BLUE);
+      GameTitlePanel.setBackground(Color.BLACK);
       Gametitle.setForeground(Color.WHITE);
       Gametitle.setFont(titleFont);
-      GameTitlePanel.add(Gametitle);
-      con.add(GameTitlePanel);  // Window base, then on top of it Container, then on Top of it JPanelGameTitlePanel.add(Gametitle);
 
+     startButtonPanel = new JPanel();
+     startButtonPanel.setBounds(300,400,200,100);
+     startButtonPanel.setBackground(Color.BLACK);
 
+     startButton = new JButton("START");
+     startButton.setBackground(Color.BLACK);
+     //startButton.setBorder(null);
+     startButton.setForeground(Color.WHITE);
+     startButton.setFont(normalFont);
+
+     GameTitlePanel.add(Gametitle);
+     startButtonPanel.add(startButton);
+     con.add(GameTitlePanel);  // Window base, then on top of it Container, then on Top of it JPanel
+        con.add(startButtonPanel);
     }
 
 }
