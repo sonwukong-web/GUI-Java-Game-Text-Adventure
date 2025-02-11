@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class Game {
     JFrame window;
     Container con;
@@ -12,9 +13,11 @@ public class Game {
     JTextArea mainTextArea;
     int playerHp;
     String weapon;
+    boolean silverRing=false;
     Font titleFont = new Font("Times New Roman", Font.PLAIN,90);
     Font normalFont = new Font("Times New Roman",Font.PLAIN,30);
     TitleScreenHandler tsHandler = new TitleScreenHandler();
+
 
     public static void main(String[] args) {
         new Game();
@@ -78,12 +81,14 @@ public class Game {
         con.add(choiceButtonPanel);
 
 
-        choice1 = new JButton("Choice 1");
+        choice1 = new JButton("Talk to Guard.");
+
         choice1.setBackground(Color.BLACK);
         choice1.setForeground(Color.white);
         choice1.setFont(normalFont);
         choiceButtonPanel.add(choice1);
         choice1.setFocusPainted(false);
+
 
         choice2 = new JButton("Choice 2");
         choice2.setBackground(Color.BLACK);
@@ -146,13 +151,19 @@ public class Game {
         mainTextArea.setText("You are at the Gate of the TOWN. A guard is standing at front of you. What do you do?");
     }
 
+
+
     public class TitleScreenHandler implements ActionListener
     {
-
         public void actionPerformed(ActionEvent event)
         {
            createGameScreen();
+
         }
+
     }
+
+
+
 
 }
