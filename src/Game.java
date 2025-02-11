@@ -12,11 +12,12 @@ public class Game {
     JButton startButton,choice1,choice2,choice3,choice4;
     JTextArea mainTextArea;
     int playerHp;
-    String weapon;
+    String weapon,position;
     boolean silverRing=false;
     Font titleFont = new Font("Times New Roman", Font.PLAIN,90);
-    Font normalFont = new Font("Times New Roman",Font.PLAIN,30);
+    Font normalFont = new Font("Times New Roman",Font.PLAIN,28);
     TitleScreenHandler tsHandler = new TitleScreenHandler();
+    ChoiceHandler choiceHandler = new ChoiceHandler();
 
 
     public static void main(String[] args) {
@@ -88,6 +89,8 @@ public class Game {
         choice1.setFont(normalFont);
         choiceButtonPanel.add(choice1);
         choice1.setFocusPainted(false);
+        choice1.addActionListener(choiceHandler);
+        choice1.setActionCommand("c1");
 
 
         choice2 = new JButton("Choice 2");
@@ -96,6 +99,8 @@ public class Game {
         choice2.setFont(normalFont);
         choiceButtonPanel.add(choice2);
         choice2.setFocusPainted(false);
+        choice2.addActionListener(choiceHandler);
+        choice2.setActionCommand("c2");
 
         choice3 = new JButton("Choice 3");
         choice3.setBackground(Color.BLACK);
@@ -103,6 +108,8 @@ public class Game {
         choice3.setFont(normalFont);
         choiceButtonPanel.add(choice3);
         choice3.setFocusPainted(false);
+        choice3.addActionListener(choiceHandler);
+        choice3.setActionCommand("c3");
 
         choice4 = new JButton("Choice 4");
         choice4.setBackground(Color.BLACK);
@@ -110,6 +117,8 @@ public class Game {
         choice4.setFont(normalFont);
         choiceButtonPanel.add(choice4);
         choice4.setFocusPainted(false);
+        choice4.addActionListener(choiceHandler);
+        choice4.setActionCommand("c4");
 
         playerPanel = new JPanel();
         playerPanel.setBounds(100,15,600,50);
@@ -148,7 +157,32 @@ public class Game {
 
     public void townGate()
     {
-        mainTextArea.setText("You are at the Gate of the TOWN. A guard is standing at front of you. What do you do?");
+        position="townGate";
+        mainTextArea.setText("You are at the Gate of the TOWN.\nA guard is standing at front of you. \nWhat do you do?");
+        choice1.setText("Talk To Guard");
+        choice2.setText("Attack The Guard");
+        choice3.setText("Leave");
+        choice4.setText("");
+    }
+
+    public void talkGuard()
+    {
+        position = "talkGuard";
+        mainTextArea.setText("Guard: Hello Stranger! I have never seen you around.\nSorry I cannot let a stranger enter the town.");
+        choice1.setText("Leave");
+        choice2.setText("");
+        choice3.setText("");
+    }
+
+    public void attackGuard()
+    {
+        position = "attackGuard";
+        mainTextArea.setText("Guard: Hey! Don't be stupid!\n\nThe Guard fought back and hit you hard.\n(You recieved 3 damage)");
+        playerHp-=3;
+        hpLabelNumber.setText(""+playerHp);
+        choice1.setText("Leave");
+        choice2.setText("");
+        choice3.setText("");
     }
 
 
@@ -161,6 +195,35 @@ public class Game {
 
         }
 
+    }
+
+    public class ChoiceHandler implements ActionListener
+    {
+        public void actionPerformed(ActionEvent event)
+        {
+            String yourChoice = event.getActionCommand();
+            switch(position)
+            {
+                case "townGate":
+                    switch(yourChoice){
+                        case "c1": talkGuard(); break;
+                        case "c2": attackGuard();break;
+                        case "c3": break;
+                    }
+                    break;
+                case "talkGuard":
+                    switch(yourChoice){
+                        case "c1": townGate(); break;
+                    }
+                    break;
+                case "attackGuard":
+                    switch(yourChoice){
+                        case "c1" : townGate();break;
+                    }
+
+            }
+
+        }
     }
 
 
