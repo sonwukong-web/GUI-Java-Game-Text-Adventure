@@ -7,8 +7,8 @@ import java.awt.event.ActionListener;
 public class Game {
     JFrame window;
     Container con;
-    JPanel GameTitlePanel , startButtonPanel, mainTextPanel,choiceButtonPanel,playerPanel;
-    JLabel Gametitle,hpLabel, hpLabelNumber,weaponLabel,weaponLabelName;
+    JPanel GameTitlePanel , startButtonPanel, mainTextPanel,choiceButtonPanel,playerPanel,imagePanel;
+    JLabel Gametitle,hpLabel, hpLabelNumber,weaponLabel,weaponLabelName,imageLabel;
     JButton startButton,choice1,choice2,choice3,choice4;
     JTextArea mainTextArea;
     int playerHp,monsterHp;
@@ -16,6 +16,7 @@ public class Game {
     boolean silverRing=false;
     Font titleFont = new Font("Times New Roman", Font.PLAIN,90);
     Font normalFont = new Font("Times New Roman",Font.PLAIN,28);
+    ImageIcon image;
     TitleScreenHandler tsHandler = new TitleScreenHandler();
     ChoiceHandler choiceHandler = new ChoiceHandler();
 
@@ -63,12 +64,12 @@ public class Game {
         startButtonPanel.setVisible(false);
         GameTitlePanel.setVisible(false);
        mainTextPanel = new JPanel();
-       mainTextPanel.setBounds(100,100,600,250);
+       mainTextPanel.setBounds(50,350,430,250);
        mainTextPanel.setBackground(Color.BLACK);
        con.add(mainTextPanel);
 
        mainTextArea = new JTextArea();
-       mainTextArea.setBounds(100,100,600,250);
+       mainTextArea.setBounds(50,350,430,250);
        mainTextArea.setBackground(Color.BLACK);
        mainTextArea.setForeground(Color.WHITE);
        mainTextArea.setFont(normalFont);
@@ -76,7 +77,7 @@ public class Game {
         mainTextPanel.add(mainTextArea);
 
         choiceButtonPanel = new JPanel();
-        choiceButtonPanel.setBounds(250,350,300,150);
+        choiceButtonPanel.setBounds(500,350,250,150);
         choiceButtonPanel.setBackground(Color.BLACK);
         choiceButtonPanel.setLayout(new GridLayout(4,1));
         con.add(choiceButtonPanel);
@@ -120,9 +121,9 @@ public class Game {
         choice4.setActionCommand("c4");
 
         playerPanel = new JPanel();
-        playerPanel.setBounds(100,15,600,50);
+        playerPanel.setBounds(500,100,270,50);
         playerPanel.setBackground(Color.BLACK);
-        playerPanel.setLayout(new GridLayout(1,4));
+        playerPanel.setLayout(new GridLayout(2,2));
         con.add(playerPanel);
         hpLabel = new JLabel("HP:");
         hpLabel.setFont(normalFont);
@@ -140,6 +141,18 @@ public class Game {
         weaponLabelName.setFont(normalFont);
         weaponLabelName.setForeground(Color.WHITE);
         playerPanel.add(weaponLabelName);
+
+        imagePanel = new JPanel();
+        imagePanel.setBounds(50,50,400,300);
+        imagePanel.setBackground(Color.BLACK);
+
+        imageLabel = new JLabel();
+
+        image = new ImageIcon("C://Users//AMIT//IdeaProjects//Adventure//res//towngate.jpg");
+
+        imageLabel.setIcon(image);
+        imagePanel.add(imageLabel);
+        con.add(imagePanel);
         playerSetup();
 
 
@@ -157,6 +170,9 @@ public class Game {
 
     public void townGate()
     {
+        image = new ImageIcon("C://Users//AMIT//IdeaProjects//Adventure//res//towngate.jpg");
+
+        imageLabel.setIcon(image);
         position="townGate";
         mainTextArea.setText("You are at the Gate of the TOWN.\nA guard is standing at front of you. \nWhat do you do?");
         choice1.setText("Talk To Guard");
@@ -167,6 +183,9 @@ public class Game {
 
     public void talkGuard()
     {
+        image = new ImageIcon("C://Users//AMIT//IdeaProjects//Adventure//res//townguard.jpg");
+
+        imageLabel.setIcon(image);
         position = "talkGuard";
         mainTextArea.setText("Guard: Hello Stranger! I have never seen you around.\nSorry I cannot let a stranger enter the town.");
         choice1.setText("Leave");
@@ -176,6 +195,9 @@ public class Game {
 
     public void attackGuard()
     {
+        image = new ImageIcon("C://Users//AMIT//IdeaProjects//Adventure//res//guardat.png");
+        imageLabel.setIcon(image);
+
         position = "attackGuard";
         mainTextArea.setText("Guard: Hey! Don't be stupid!\n\nThe Guard fought back and hit you hard.\n(You recieved 3 damage)");
         playerHp-=3;
@@ -187,6 +209,10 @@ public class Game {
 
     public void crossRoad()
     {
+        image = new ImageIcon("C://Users//AMIT//IdeaProjects//Adventure//res//crossroads.jpg");
+        imageLabel.setIcon(image);
+
+
         position = "crossRoad";
         mainTextArea.setText("You are at a cross road.\nIf you go South you can reach back Town.");
         choice1.setText("NORTH");
@@ -196,6 +222,9 @@ public class Game {
     }
     public void north()
     {
+        image = new ImageIcon("C://Users//AMIT//IdeaProjects//Adventure//res//heal.jpg");
+        imageLabel.setIcon(image);
+
      position = "north";
      mainTextArea.setText("There is a river.\n You drink the water and rest at riverside.\n(Your HP is healed)");
      playerHp+=3;
@@ -207,6 +236,9 @@ public class Game {
     }
     public void east()
     {
+        image = new ImageIcon("C://Users//AMIT//IdeaProjects//Adventure//res//longswords.jpg");
+        imageLabel.setIcon(image);
+
         position = "east";
         mainTextArea.setText("You walked into a Forest and Found a Long Sword.\n\n (You Obtaine A LONG SWORD!!");
         weapon = "Long Sword";
@@ -218,6 +250,9 @@ public class Game {
     }
     public void west()
     {
+        image = new ImageIcon("C://Users//AMIT//IdeaProjects//Adventure//res//Goblin.jpg");
+        imageLabel.setIcon(image);
+
      position = "west";
      mainTextArea.setText("You Encounter a Goblin!");
      choice1.setText("FIGHT!!");
